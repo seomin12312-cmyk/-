@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>나의 글쓰기 여정 | Personal Writing Journey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="책을 쓰는 과정을 함께 나누는 개인 홈페이지입니다." />
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --bg-alt: #ffffff;
+      --text: #222222;
+      --muted: #666666;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59,130,246,0.08);
+      --border: #e2e2e6;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI",
+        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe, #f5f5f7 55%);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(245, 245, 247, 0.85);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 14px 20px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      font-weight: 400;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    main {
+      padding: 28px 16px 60px;
+    }
+
+    .hero {
+      max-width: 960px;
+      margin: 0 auto 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      background: linear-gradient(135deg, #f8fafc, #ffffff);
+      border-radius: var(--radius-xl);
+      padding: 28px 26px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .hero-kicker {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .meta-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.35);
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        background 0.12s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 36px rgba(37, 99, 235, 0.35);
+      background: #2563eb;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border-radius: 999px;
+      padding: 8px 14px;
+      border: 1px dashed rgba(148, 163, 184, 0.9);
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background 0.12s ease, border-color 0.12s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(248, 250, 252, 0.95);
+      border-color: var(--accent);
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: var(--radius-lg);
+      padding: 16px 16px 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      margin-top: 8px;
+    }
+
+    .progress-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-track {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      width: 40%; /* 진행률: 여기 숫자를 바꿔 주세요 */
+      transition: width 0.3s ease;
+    }
+
+    .log-list {
+      list-style: none;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .log-list li + li {
+      margin-top: 4px;
+    }
+
+    .section {
+      max-width: 960px;
+      margin: 0 auto 24px;
+    }
+
+    .section-inner {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 22px 24px 20px;
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+    }
+
+    .section-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    .timeline {
+      border-left: 2px solid #e5e7eb;
+      padding-left: 16px;
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.2);
+    }
+
+    .timeline-date {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .about-text p + p {
+      margin-top: 6px;
+    }
+
+    .note-box {
+      font-size: 0.85rem;
+      background: #f9fafb;
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px dashed #e5e7eb;
+      color: var(--muted);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      background: #f9fafb;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.4);
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px 20px 40px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .footer a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-main {
+        order: 1;
+      }
+      .hero-side {
+        order: 2;
+      }
+      .two-cols,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .section-inner {
+        padding: 18px 16px;
+      }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        justify-content: flex-start;
+      }
+      .footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 네비게이션 -->
+  <header class="site-header">
+    <div class="container nav">
+      <div class="logo">
+        <!-- 여기 이름을 바꾸세요 -->
+        YS WRITES <span>글쓰기 여정</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#home">HOME</a>
+        <a href="#book">BOOK</a>
+        <a href="#log">WRITING LOG</a>
+        <a href="#about">ABOUT</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 히어로 섹션 -->
+    <section id="home" class="hero">
+      <div class="hero-main">
+        <div class="hero-kicker">WRITING IN PROGRESS</div>
+        <!-- 여기 책 제목과 한 줄 소개를 바꾸세요 -->
+        <h1 class="hero-title">『아직 완성되지 않은 책』의 탄생기</h1>
+        <p class="hero-subtitle">
+          평범한 직장인이 “한 권의 책을 쓰는 사람”이 되기까지, 그 모든 과정을
+          기록하는 공개 작업 노트입니다.
+        </p>
+
+        <div class="hero-meta">
+          <span>예상 출간: 2026년 상반기</span>
+          <span>주제: 일과 삶, 그리고 글쓰기</span>
+          <span class="meta-pill">첫 책을 향한 여정</span>
+        </div>
+
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="document.getElementById('log').scrollIntoView({behavior:'smooth'})">
+            글쓰기 여정부터 보기
+          </button>
+          <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            업데이트 알림 신청하기
+          </button>
+        </div>
+        <p class="hero-note">
+          이 페이지는 “완성된 포트폴리오”가 아니라, 계속 수정되고 자라는
+          작업실입니다.
+        </p>
+      </div>
+
+      <aside class="hero-side">
+        <div class="card">
+          <div class="card-title">지금 글쓰기 진행 상황</div>
+          <div class="card-subtitle">실시간에 가깝게, 최대한 솔직하게 기록합니다.</div>
+          <div class="progress">
+            <div class="progress-label">
+              <span>원고 진행률</span>
+              <span>40%</span>
+            </div>
+            <div class="progress-track">
+              <!-- 진행률 숫자에 맞춰 width를 조정하세요 -->
+              <div class="progress-fill" style="width: 40%;"></div>
+            </div>
+          </div>
+          <ul class="log-list">
+            <li>2025-12-08 · 3장 초고 완성, 4장 구조 잡기 시작</li>
+            <li>2025-12-02 · 서문 2차 수정, 제목 후보 3개 정리</li>
+            <li>2025-11-24 · “퇴근 후 글쓰기 루틴” 실험 시작</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">최근 글쓰기 메모</div>
+          <p class="card-subtitle">
+            좋은 글은 “잘 쓴 문장”보다 “솔직한 생각”에서 출발한다.
+          </p>
+          <p style="font-size:0.82rem; color: #4b5563;">
+            오늘도 퇴근 후 카페 한 구석에서 노트북을 열었습니다.  
+            문장이 막히는 날도 있지만, “앉아만 있지 말고 한 줄이라도 쓰자”는
+            마음으로 페이지를 채워봅니다.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- 책 소개 섹션 -->
+    <section id="book" class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">ABOUT THE BOOK</div>
+            <h2 class="section-title">지금 쓰고 있는 그 책에 대하여</h2>
+          </div>
+        </div>
+        <p class="section-desc">
+          아직 제목도, 표지도, 출간사도 정해지지 않았습니다.  
+          하지만 이 책이 다루고 싶은 질문만큼은 분명합니다. “평범한 사람이
+          어떻게 자기만의 이야기를 글로 만들어낼 수 있을까?”
+        </p>
+
+        <div class="two-cols">
+          <div>
+            <h3 style="font-size:0.95rem; margin-bottom:6px;">가제(임시 제목)</h3>
+            <p style="font-weight:600; margin-bottom:10px;">
+              『퇴근 후, 한 줄씩: 아주 느리지만 포기하지 않는 글쓰기』
+            </p>
+            <h3 style="font-size:0.95rem; margin-bottom:6px;">한 줄 소개</h3>
+            <p style="font-size:0.9rem; margin-bottom:10px;">
+              9시 출근, 6시 퇴근, 그리고 그 이후에 겨우 시작되는 “나만의
+              문장”에 대한 이야기입니다.
+            </p>
+
+            <h3 style="font-size:0.95rem; margin-bottom:6px;">예상 목차(초안)</h3>
+            <ul style="font-size:0.88rem; color:var(--muted); padding-left:18px; margin-bottom:6px;">
+              <li>1장 · 나는 왜 글을 쓰겠다고 했을까</li>
+              <li>2장 · 퇴근 후 글쓰기 루틴 만들기</li>
+              <li>3장 · 슬럼프와 자기혐오를 다루는 법</li>
+              <li>4장 · 나만의 목차와 목소리 찾기</li>
+              <li>5장 · 삶을 자료로 삼는 기술</li>
+              <li>6장 · 한 권의 책으로 묶이는 순간까지</li>
+            </ul>
+            <p class="note-box">
+              위 목차와 내용은 글쓰기 과정에서 계속 바뀔 수 있습니다.  
+              이 페이지에서는 그 변화의 흔적까지 같이 기록하려고 합니다.
+            </p>
+          </div>
+
+          <div>
+            <h3 style="font-size:0.95rem; margin-bottom:6px;">본문 미리 보기(짧은 단락)</h3>
+            <p style="font-size:0.86rem; color:var(--muted); background:#f9fafb; border-radius:14px; padding:10px 12px; border:1px solid #e5e7eb;">
+              “나는 글을 쓰는 사람이 아니라, 글을 ‘써보려고 애쓰는 사람’에 더
+              가깝다.  
+              퇴근 시간은 정해져 있지만, 문장이 나오는 시간은 정해져 있지 않다.
+              그래서 야속하기도 하다. 그럼에도 노트북을 펼치는 이유는 단 하나다.
+              언젠가 이 느리고 지지부진한 문장들이 모여, 누군가의 하루를 조금
+              덜 버겁게 만들어 줄지도 모른다는 믿음 때문이다.”
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 글쓰기 로그 섹션 -->
+    <section id="log" class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">WRITING LOG</div>
+            <h2 class="section-title">글쓰기 작업 일지</h2>
+          </div>
+        </div>
+        <p class="section-desc">
+          “얼마나 많이 썼느냐”보다 “얼마나 자주 앉았느냐”를 기록해 보려고
+          합니다.  
+          아래 로그는 매주 혹은 매일, 가능하면 짧게라도 업데이트할
+          계획입니다.
+        </p>
+
+        <ul class="timeline">
+          <li class="timeline-item">
+            <div class="timeline-date">2025-12-08 · 월요일</div>
+            <div class="timeline-title">3장 초고 마무리, 4장 구조 잡기</div>
+            <div class="timeline-desc">
+              퇴근 후 카페에서 2시간. 문장은 자꾸 어딘가 어색하지만, 오늘의
+              목표였던 “3장 초고 끝내기”는 일단 달성.  
+              글이 마음에 들지 않아도 “완료” 버튼을 누르는 용기를 배우는 중.
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-date">2025-12-02 · 화요일</div>
+            <div class="timeline-title">서문 2차 수정, 제목 후보 정리</div>
+            <div class="timeline-desc">
+              서문이 너무 진지해서, 농담을 한 스푼 넣어 봤다.  
+              제목 후보는 세 개로 압축: 「퇴근 후 한 줄씩」, 「평범한
+              직장인의 첫 책」, 「아직 완성되지 않은 책」.
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-date">2025-11-24 · 월요일</div>
+            <div class="timeline-title">글쓰기 루틴 실험 시작</div>
+            <div class="timeline-desc">
+              “주 3회, 90분씩”이라는 최소 규칙을 정했다.  
+              완벽한 계획 대신, 지킬 수 있는 약속 하나를 선택하는 편이 낫다는
+              걸 배워가는 중.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 작가 소개 섹션 -->
+    <section id="about" class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">ABOUT THE AUTHOR</div>
+            <h2 class="section-title">작가 소개, 혹은 그냥 나에 대하여</h2>
+          </div>
+        </div>
+
+        <div class="two-cols">
+          <div class="about-text">
+            <p style="font-size:0.9rem;">
+              낮에는 평범한 직장인, 밤에는 조금 덜 평범한 글쟁이가 되려고
+              합니다.  
+              오랫동안 “언젠가 책을 쓰고 싶다”는 말을 입버릇처럼 해 왔는데,
+              어느 날 문득 깨달았습니다. “언젠가”라는 말은 대개 “아무 때나
+              안 해도 된다”는 말과 비슷하다는 것을요.
+            </p>
+            <p style="font-size:0.9rem;">
+              그래서 변명을 조금 줄이고, 실제로 페이지를 채워보기로 했습니다.
+              이 홈페이지는 그 과정의 기록입니다.  
+              거창한 성공담이 아니라, 자주 미루고, 자주 후회하면서도
+              결국에는 한 줄씩 적어 나가는 사람의 이야기입니다.
+            </p>
+            <p style="font-size:0.9rem;">
+              이 여정이 끝나면, 저는 아마 조금 다른 사람이 되어 있을 겁니다.  
+              그리고 언젠가 비슷한 마음으로 글을 쓰고 싶은 누군가에게, 이
+              기록이 작은 참고서가 되었으면 좋겠습니다.
+            </p>
+          </div>
+
+          <div>
+            <div class="note-box" style="margin-bottom:10px;">
+              간단 프로필
+              <ul style="margin-top:4px; padding-left:16px; font-size:0.84rem;">
+                <li>직업: ○○ 분야 직장인</li>
+                <li>관심사: 글쓰기, 교육, 일과 삶의 균형</li>
+                <li>버킷리스트: 첫 책 출간, 작은 북토크 열기</li>
+              </ul>
+            </div>
+            <div class="note-box">
+              이력서처럼 완벽한 프로필이 아니어도 괜찮습니다.  
+              “왜 이 책을 쓰는지”에 대한 한두 줄이 있다면, 그게 가장 중요한
+              소개가 됩니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 연락 / 구독 섹션 -->
+    <section id="contact" class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">STAY IN TOUCH</div>
+            <h2 class="section-title">업데이트 소식, 그리고 연락하기</h2>
+          </div>
+        </div>
+        <p class="section-desc">
+          책 쓰기 과정의 중요한 업데이트(원고 완성, 출간 소식 등)를 가볍게
+          이메일로 전해 드리려고 합니다.  
+          아래 폼은 실제 메일 발송 기능이 없으니, 메일링 서비스와 연결해
+          사용하시면 됩니다.
+        </p>
+
+        <div class="contact-grid">
+          <form>
+            <div class="form-group">
+              <label for="email">이메일 주소</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="message">하고 싶은 말 (선택)</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="응원, 질문, 제안… 어떤 이야기든 환영합니다."
+              ></textarea>
+            </div>
+            <button type="submit" class="btn-primary">
+              업데이트 알림 신청하기
+            </button>
+          </form>
+
+          <div>
+            <div class="note-box">
+              실제로 메일을 받으려면?
+              <ul style="margin-top:4px; padding-left:16px; font-size:0.84rem;">
+                <li>구글 폼, 폼스파크(Formspree) 같은 서비스를 폼에 연결하거나</li>
+                <li>뉴스레터 플랫폼(스티비, 브런치 북, 이메일 뉴스레터 등)을 함께 사용하시면 편합니다.</li>
+              </ul>
+            </div>
+            <p style="font-size:0.84rem; color:var(--muted); margin-top:8px;">
+              또는 아래 주소로 직접 메일을 보내주셔도 좋습니다.  
+              <strong>your-email@example.com</strong>  
+              (위 주소를 실제 사용하는 이메일로 바꿔 주세요.)
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div>© 2025 나의 글쓰기 여정. All rights reserved.</div>
+    <div>
+      Made with plain HTML &amp; CSS · 수정과 실험은 언제나 진행 중입니다.
+    </div>
+  </footer>
+</body>
+</html>
