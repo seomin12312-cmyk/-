@@ -2,21 +2,22 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>나의 글쓰기 여정 | Personal Writing Journey</title>
+  <title>나의 책 쓰기 여정</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="책을 쓰는 과정을 함께 나누는 서용석의 홈페이지입니다." />
+  <meta
+    name="description"
+    content="책 쓰는 과정을 단계별로 공개하고, 독자와 함께 이야기 나누는 개인 홈페이지입니다."
+  />
   <style>
     :root {
       --bg: #f5f5f7;
-      --bg-alt: #ffffff;
-      --text: #222222;
-      --muted: #666666;
-      --accent: #3b82f6;
-      --accent-soft: rgba(59,130,246,0.08);
-      --border: #e2e2e6;
-      --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
-      --radius-lg: 18px;
-      --radius-xl: 26px;
+      --card: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.08);
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --radius: 14px;
     }
 
     * {
@@ -26,13 +27,11 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI",
-        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      background: radial-gradient(circle at top left, #e0f2fe, #f5f5f7 55%);
+      font-family: -apple-system, BlinkMacSystemFont, system-ui,
+        "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 0;
-      margin: 0;
     }
 
     a {
@@ -40,365 +39,266 @@
       text-decoration: none;
     }
 
-    .site-header {
+    header {
+      background: #ffffffcc;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-      background: rgba(245, 245, 247, 0.85);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      z-index: 10;
     }
 
     .container {
       max-width: 960px;
       margin: 0 auto;
-      padding: 14px 20px;
+      padding: 12px 16px;
     }
 
     .nav {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
+      flex-wrap: wrap;
     }
 
     .logo {
       font-weight: 700;
-      letter-spacing: 0.04em;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     .logo span {
-      font-weight: 400;
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 0.8rem;
       color: var(--muted);
-      margin-left: 6px;
+      text-transform: none;
     }
 
-    .nav-links {
+    .tabs {
       display: flex;
-      gap: 14px;
-      font-size: 0.9rem;
-      color: var(--muted);
+      gap: 8px;
       flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
-    .nav-links a {
-      padding: 6px 10px;
+    .tab-link {
+      font-size: 0.9rem;
+      padding: 6px 12px;
       border-radius: 999px;
-      transition: background 0.2s ease, color 0.2s ease;
+      border: 1px solid transparent;
+      color: var(--muted);
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.15s ease, color 0.15s ease,
+        border-color 0.15s ease;
     }
 
-    .nav-links a:hover {
-      background: var(--accent-soft);
+    .tab-link:hover {
+      background: #f3f4f6;
+    }
+
+    .tab-link.active {
       color: var(--accent);
+      background: var(--accent-soft);
+      border-color: rgba(37, 99, 235, 0.2);
+      font-weight: 600;
     }
 
     main {
-      padding: 28px 16px 60px;
-    }
-
-    .hero {
       max-width: 960px;
-      margin: 0 auto 32px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-      gap: 24px;
-      align-items: stretch;
+      margin: 18px auto 40px;
+      padding: 0 16px;
     }
 
-    .hero-main {
-      background: linear-gradient(135deg, #f8fafc, #ffffff);
-      border-radius: var(--radius-xl);
-      padding: 28px 26px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(226, 232, 240, 0.9);
+    section {
+      margin-bottom: 24px;
     }
 
-    .hero-kicker {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--accent);
-      margin-bottom: 8px;
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 18px 18px 16px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 12px;
     }
 
     .hero-title {
-      font-size: 1.9rem;
-      font-weight: 700;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
     }
 
-    .hero-subtitle {
-      font-size: 1.05rem;
-      color: var(--muted);
-      margin-bottom: 18px;
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-bottom: 8px;
     }
 
     .hero-meta {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
       font-size: 0.85rem;
       color: var(--muted);
+      margin-bottom: 10px;
     }
 
-    .meta-pill {
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 500;
-      font-size: 0.8rem;
-    }
-
-    .hero-cta {
+    .hero-actions {
+      margin-top: 6px;
       display: flex;
+      gap: 8px;
       flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: inline-block;
+      font-size: 0.9rem;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.15s ease, color 0.15s ease,
+        border-color 0.15s ease, transform 0.1s ease;
     }
 
     .btn-primary {
       background: var(--accent);
-      color: white;
-      border: none;
-      padding: 9px 18px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      font-weight: 600;
-      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.35);
-      transition: transform 0.12s ease, box-shadow 0.12s ease,
-        background 0.12s ease;
+      color: #ffffff;
+      border-color: var(--accent);
     }
 
     .btn-primary:hover {
+      background: #1d4ed8;
+      border-color: #1d4ed8;
       transform: translateY(-1px);
-      box-shadow: 0 18px 36px rgba(37, 99, 235, 0.35);
-      background: #2563eb;
     }
 
-    .btn-ghost {
-      background: transparent;
-      border-radius: 999px;
-      padding: 8px 14px;
-      border: 1px dashed rgba(148, 163, 184, 0.9);
-      font-size: 0.85rem;
-      cursor: pointer;
+    .btn-outline {
+      border-color: var(--border);
       color: var(--muted);
-      transition: background 0.12s ease, border-color 0.12s ease;
+      background: #f9fafb;
     }
 
-    .btn-ghost:hover {
-      background: rgba(248, 250, 252, 0.95);
-      border-color: var(--accent);
-    }
-
-    .hero-note {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .hero-side {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.96);
-      border-radius: var(--radius-lg);
-      padding: 16px 16px 14px;
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-    }
-
-    .card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .card-subtitle {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .progress {
-      margin-top: 8px;
-    }
-
-    .progress-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 4px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .progress-track {
-      height: 8px;
+    .btn-outline:hover {
       background: #e5e7eb;
-      border-radius: 999px;
-      overflow: hidden;
     }
 
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #10b981);
-      width: 40%; /* 진행률: 여기 숫자를 바꿔 주세요 */
-      transition: width 0.3s ease;
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 16px;
     }
 
-    .log-list {
+    @media (max-width: 768px) {
+      .grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .step-list {
       list-style: none;
+      border-left: 2px solid #e5e7eb;
+      padding-left: 14px;
       margin-top: 8px;
-      font-size: 0.8rem;
-      color: var(--muted);
     }
 
-    .log-list li + li {
-      margin-top: 4px;
-    }
-
-    .section {
-      max-width: 960px;
-      margin: 0 auto 24px;
-    }
-
-    .section-inner {
-      background: rgba(255, 255, 255, 0.96);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border);
-      padding: 22px 24px 20px;
-      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: baseline;
-      margin-bottom: 10px;
-    }
-
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .section-kicker {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--accent);
-    }
-
-    .section-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
+    .step-item {
+      position: relative;
       margin-bottom: 14px;
     }
 
-    .two-cols {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 20px;
-    }
-
-    .timeline {
-      border-left: 2px solid #e5e7eb;
-      padding-left: 16px;
-      list-style: none;
-      font-size: 0.9rem;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 12px;
-    }
-
-    .timeline-item::before {
+    .step-item::before {
       content: "";
       position: absolute;
-      left: -20px;
-      top: 5px;
+      left: -18px;
+      top: 6px;
       width: 10px;
       height: 10px;
       border-radius: 999px;
-      background: #3b82f6;
-      box-shadow: 0 0 0 4px rgba(59,130,246,0.2);
+      background: var(--accent);
     }
 
-    .timeline-date {
+    .step-label {
       font-size: 0.78rem;
       color: var(--muted);
-      margin-bottom: 2px;
     }
 
-    .timeline-title {
+    .step-title {
       font-weight: 600;
-      margin-bottom: 2px;
+      margin: 2px 0;
     }
 
-    .timeline-desc {
-      font-size: 0.85rem;
+    .step-body {
+      font-size: 0.88rem;
       color: var(--muted);
     }
 
-    .about-text p + p {
+    .note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: #f9fafb;
+      border-radius: 10px;
+      border: 1px dashed var(--border);
+      padding: 8px 10px;
+      margin-top: 8px;
+    }
+
+    .profile-list,
+    .book-list {
+      list-style: none;
       margin-top: 6px;
     }
 
-    .note-box {
-      font-size: 0.85rem;
-      background: #f9fafb;
-      border-radius: 14px;
-      padding: 10px 12px;
-      border: 1px dashed #e5e7eb;
-      color: var(--muted);
+    .profile-list li,
+    .book-list li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
     }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 18px;
-      align-items: start;
-    }
-
-    .form-group {
+    .field-group {
       margin-bottom: 10px;
     }
 
-    label {
+    .field-group label {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
 
-    input,
-    textarea {
+    .field-group input,
+    .field-group textarea {
       width: 100%;
-      border-radius: 12px;
-      border: 1px solid #d1d5db;
       padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
       font-size: 0.9rem;
       font-family: inherit;
       outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
       background: #f9fafb;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    input:focus,
-    textarea:focus {
+    .field-group input:focus,
+    .field-group textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(59,130,246,0.4);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
       background: #ffffff;
     }
 
@@ -407,305 +307,191 @@
       resize: vertical;
     }
 
-    .footer {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 16px 20px 40px;
+    .small {
       font-size: 0.8rem;
       color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      border-top: 1px solid rgba(226, 232, 240, 0.9);
     }
 
-    .footer a {
-      text-decoration: underline;
-      text-decoration-style: dotted;
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 14px 16px 24px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
     }
 
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero-main {
-        order: 1;
-      }
-      .hero-side {
-        order: 2;
-      }
-      .two-cols,
-      .contact-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .section-inner {
-        padding: 18px 16px;
-      }
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-links {
-        justify-content: flex-start;
-      }
-      .footer {
-        flex-direction: column;
-      }
+    .hidden {
+      display: none;
     }
   </style>
+
+  <script>
+    // 간단한 탭 전환 스크립트
+    document.addEventListener("DOMContentLoaded", function () {
+      const tabs = document.querySelectorAll(".tab-link");
+      const sections = document.querySelectorAll("main section");
+
+      function showTab(targetId) {
+        sections.forEach((sec) => {
+          if (sec.id === targetId) {
+            sec.classList.remove("hidden");
+          } else {
+            sec.classList.add("hidden");
+          }
+        });
+
+        tabs.forEach((btn) => {
+          if (btn.dataset.target === targetId) {
+            btn.classList.add("active");
+          } else {
+            btn.classList.remove("active");
+          }
+        });
+      }
+
+      tabs.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          showTab(btn.dataset.target);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      // 초기 화면: home
+      showTab("home");
+    });
+  </script>
 </head>
 <body>
-  <!-- 상단 네비게이션 -->
-  <header class="site-header">
+  <header>
     <div class="container nav">
       <div class="logo">
-        <!-- 여기 이름을 바꾸세요 -->
-        서용석 <span>글쓰기 여정</span>
+        MY WRITING JOURNEY
+        <span>책 쓰기 과정 공개 노트</span>
       </div>
-      <nav class="nav-links">
-        <a href="#home">HOME</a>
-        <a href="#book">BOOK</a>
-        <a href="#log">WRITING LOG</a>
-        <a href="#about">ABOUT</a>
-        <a href="#contact">CONTACT</a>
-      </nav>
+      <div class="tabs">
+        <!-- data-target 값은 아래 section의 id와 일치해야 합니다 -->
+        <button class="tab-link" data-target="home">홈</button>
+        <button class="tab-link" data-target="journey">글쓰기 과정</button>
+        <button class="tab-link" data-target="author">작가 소개</button>
+        <button class="tab-link" data-target="books">추천 도서</button>
+        <button class="tab-link" data-target="contact">연락하기</button>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- 히어로 섹션 -->
-    <section id="home" class="hero">
-      <div class="hero-main">
-        <div class="hero-kicker">WRITING IN PROGRESS</div>
-        <!-- 여기 책 제목과 한 줄 소개를 바꾸세요 -->
-        <h1 class="hero-title">『평등과 관련된 생각 공유』의 탄생기</h1>
-        <p class="hero-subtitle">
-          평범한 직장인이 “여러권의 책을 계속 쓰고싶어요~~”이 되기까지, 그 모든 과정을
-          기록하는 공개 작업 노트입니다.
+    <!-- 1. 홈 탭 -->
+    <section id="home">
+      <div class="card">
+        <div class="hero-badge">Writing in Progress</div>
+        <h1 class="hero-title">『(가제) 퇴근 후 한 줄씩』 쓰기 프로젝트</h1>
+        <p class="section-sub">
+          평범한 사람이 한 권의 책을 쓰기까지, 생각과 시행착오를 숨기지 않고
+          공개하는 작업 노트입니다. 이곳에서 초고부터 퇴고까지의 과정을
+          차근차근 기록해 두려고 합니다.
         </p>
 
         <div class="hero-meta">
-          <span>예상 출간: 2026년 상반기</span>
-          <span>주제: 일과 삶, 그리고 글쓰기</span>
-          <span class="meta-pill">첫 책을 향한 여정</span>
+          예상 출간 시기: 20XX년 / 주제: 일, 삶, 그리고 글쓰기 습관  
+          (아래 탭에서 글쓰기 단계별 기록과 작가 소개, 추천 도서, 연락처를 볼 수 있습니다.)
         </div>
 
-        <div class="hero-cta">
-          <button class="btn-primary" onclick="document.getElementById('log').scrollIntoView({behavior:'smooth'})">
-            글쓰기 여정부터 보기
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="document.querySelector('[data-target=\\'journey\\']').click();">
+            글쓰기 과정부터 보기
           </button>
-          <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-            업데이트 알림 신청하기
+          <button class="btn btn-outline" onclick="document.querySelector('[data-target=\\'contact\\']').click();">
+            업데이트 소식 받고 싶어요
           </button>
         </div>
-        <p class="hero-note">
-          이 페이지는 “완성된 포트폴리오”가 아니라, 계속 수정되고 자라는
-          작업실입니다.
+
+        <p class="note">
+          이 홈페이지는 완성된 결과물을 자랑하는 공간이 아니라,
+          “쓰는 중인 사람”의 고민과 실험을 함께 나누는 작은 작업실입니다.
         </p>
-      </div>
-
-      <aside class="hero-side">
-        <div class="card">
-          <div class="card-title">지금 글쓰기 진행 상황</div>
-          <div class="card-subtitle">실시간에 가깝게, 최대한 솔직하게 기록합니다.</div>
-          <div class="progress">
-            <div class="progress-label">
-              <span>원고 진행률</span>
-              <span>40%</span>
-            </div>
-            <div class="progress-track">
-              <!-- 진행률 숫자에 맞춰 width를 조정하세요 -->
-              <div class="progress-fill" style="width: 40%;"></div>
-            </div>
-          </div>
-          <ul class="log-list">
-            <li>2025-12-08 · 3장 초고 완성, 4장 구조 잡기 시작</li>
-            <li>2025-12-02 · 서문 2차 수정, 제목 후보 3개 정리</li>
-            <li>2025-11-24 · “퇴근 후 글쓰기 루틴” 실험 시작</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="card-title">최근 글쓰기 메모</div>
-          <p class="card-subtitle">
-            좋은 글은 “잘 쓴 문장”보다 “솔직한 생각”에서 출발한다.
-          </p>
-          <p style="font-size:0.82rem; color: #4b5563;">
-            오늘도 퇴근 후 카페 한 구석에서 노트북을 열었습니다.  
-            문장이 막히는 날도 있지만, “앉아만 있지 말고 한 줄이라도 쓰자”는
-            마음으로 페이지를 채워봅니다.
-          </p>
-        </div>
-      </aside>
-    </section>
-
-    <!-- 책 소개 섹션 -->
-    <section id="book" class="section">
-      <div class="section-inner">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">ABOUT THE BOOK</div>
-            <h2 class="section-title">지금 쓰고 있는 그 책에 대하여</h2>
-          </div>
-        </div>
-        <p class="section-desc">
-          아직 제목도, 표지도, 출간사도 정해지지 않았습니다.  
-          하지만 이 책이 다루고 싶은 질문만큼은 분명합니다. “평범한 사람이
-          어떻게 자기만의 이야기를 글로 만들어낼 수 있을까?”
-        </p>
-
-        <div class="two-cols">
-          <div>
-            <h3 style="font-size:0.95rem; margin-bottom:6px;">가제(임시 제목)</h3>
-            <p style="font-weight:600; margin-bottom:10px;">
-              『퇴근 후, 여러 주제에 대해 사식하고 제목과 목차 기획하며 글쓰기』
-            </p>
-            <h3 style="font-size:0.95rem; margin-bottom:6px;">한 줄 소개</h3>
-            <p style="font-size:0.9rem; margin-bottom:10px;">
-              퇴근후 시작되는 “나만의 글쓰기 세상”에 대한 이야기입니다.
-            </p>
-
-            <h3 style="font-size:0.95rem; margin-bottom:6px;">예상 목차(초안)</h3>
-            <ul style="font-size:0.88rem; color:var(--muted); padding-left:18px; margin-bottom:6px;">
-              <li>1장 · 나는 왜 글을 쓰겠다고 했을까</li>
-              <li>2장 · 퇴근 후 글쓰기 루틴 만들기</li>
-              <li>3장 · 슬럼프와 자기혐오를 다루는 법</li>
-              <li>4장 · 나만의 목차와 목소리 찾기</li>
-              <li>5장 · 삶을 자료로 삼는 기술</li>
-              <li>6장 · 한 권의 책으로 묶이는 순간까지</li>
-            </ul>
-            <p class="note-box">
-              위 목차와 내용은 글쓰기 과정에서 계속 바뀔 수 있습니다.  
-              이 페이지에서는 그 변화의 흔적까지 같이 기록하려고 합니다.
-            </p>
-          </div>
-
-          <div>
-            <h3 style="font-size:0.95rem; margin-bottom:6px;">본문 미리 보기(짧은 단락)</h3>
-            <p style="font-size:0.86rem; color:var(--muted); background:#f9fafb; border-radius:14px; padding:10px 12px; border:1px solid #e5e7eb;">
-              “나는 글을 쓰는 사람이 아니라, 글을 ‘써보려고 애쓰는 사람’에 더
-              가깝다.  
-              퇴근 시간은 정해져 있지만, 문장이 나오는 시간은 정해져 있지 않다.
-              그래서 야속하기도 하다. 그럼에도 노트북을 펼치는 이유는 단 하나다.
-              언젠가 이 느리고 지지부진한 문장들이 모여, 누군가의 하루를 조금
-              덜 버겁게 만들어 줄지도 모른다는 믿음 때문이다.”
-            </p>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- 글쓰기 로그 섹션 -->
-    <section id="log" class="section">
-      <div class="section-inner">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">WRITING LOG</div>
-            <h2 class="section-title">글쓰기 작업 일지</h2>
-          </div>
-        </div>
-        <p class="section-desc">
-          “얼마나 많이 썼느냐”보다 “얼마나 자주 앉았느냐”를 기록해 보려고
-          합니다.  
-          아래 로그는 매주 혹은 매일, 가능하면 짧게라도 업데이트할
-          계획입니다.
+    <!-- 2. 글쓰기 과정 탭 -->
+    <section id="journey" class="hidden">
+      <div class="card">
+        <h2 class="section-title">글쓰기 과정 기록</h2>
+        <p class="section-sub">
+          책을 쓰는 과정을 “단계(step)” 단위로 정리했습니다.
+          아래 블록 하나가 글 한 편(또는 단계)라고 생각하시고,
+          필요할 때마다 그대로 복사해서 새 단계를 추가하시면 됩니다.
         </p>
 
-        <ul class="timeline">
-          <li class="timeline-item">
-            <div class="timeline-date">2025-12-08 · 월요일</div>
-            <div class="timeline-title">1장 초고, 2장 목차잡기</div>
-            <div class="timeline-desc">
-              퇴근 후 카페에서 2시간. 문장은 자꾸 어딘가 어색하지만, 오늘의
-              목표였던 “1장 초고 끝내기”는 일단 달성.  
-              글이 마음에 들지 않아도 “완료” 버튼을 누르는 용기를 배우는 중.
-            </div>
+        <!-- 여기부터 각 단계 블록입니다. 복사해서 아래에 계속 추가하세요. -->
+        <ul class="step-list">
+          <li class="step-item">
+            <div class="step-label">STEP 1 · 아이디어 정리 · 2025-12-10</div>
+            <div class="step-title">왜 이 책을 쓰기로 마음먹었는가</div>
+            <p class="step-body">
+              퇴근 후에도 머릿속에서 떠나지 않는 생각들을 노트에 적기 시작했습니다.
+              “언젠가”가 아니라 “지금” 쓰지 않으면 영영 사라질 것 같은 이야기들이었습니다.
+              이 단계에서는 주제의 방향과, 이 책이 누구에게 도움이 될지를 거칠게라도 적어 두었습니다.
+            </p>
           </li>
 
-          <li class="timeline-item">
-            <div class="timeline-date">2025-12-02 · 화요일</div>
-            <div class="timeline-title">서문 2차 수정, 제목 후보 정리</div>
-            <div class="timeline-desc">
-              서문이 너무 진지해서, 농담을 한 스푼 넣어 봤다.  
-              제목 후보는 세 개로 압축: 「퇴근 후 한 줄씩」, 「평범한
-              직장인의 첫 책」, 「아직 완성되지 않은 책」.
-            </div>
+          <li class="step-item">
+            <div class="step-label">STEP 2 · 목차 초안 · 2025-12-20</div>
+            <div class="step-title">큰 흐름만 먼저 잡아 보기</div>
+            <p class="step-body">
+              아직 내용이 비어 있어도 괜찮다 생각하고 1장부터 6장까지 큰 제목만 적어 보았습니다.
+              목차는 나중에 몇 번이고 바뀔 수 있지만, 지금 어디쯤 가고 있는지 보여주는 지도라 생각합니다.
+            </p>
           </li>
 
-          <li class="timeline-item">
-            <div class="timeline-date">2025-11-24 · 월요일</div>
-            <div class="timeline-title">글쓰기 루틴 실험 시작</div>
-            <div class="timeline-desc">
-              “주 3회, 90분씩”이라는 최소 규칙을 정했다.  
-              완벽한 계획 대신, 지킬 수 있는 약속 하나를 선택하는 편이 낫다는
-              걸 배워가는 중.
-            </div>
+          <li class="step-item">
+            <div class="step-label">STEP 3 · 1장 초고 쓰기 · 2026-01-05</div>
+            <div class="step-title">완벽함보다 “완료”를 목표로</div>
+            <p class="step-body">
+              문장이 어색해도, 논리가 조금 덜 다듬어져 있어도 일단 1장을 끝까지 써 보았습니다.
+              이 단계에서는 “퇴고는 나중에, 오늘은 끝까지 써 보기”라는 약속만 지키려고 했습니다.
+            </p>
           </li>
         </ul>
+
+        <p class="note">
+          새 글을 추가하고 싶으시면, 위의
+          <code>&lt;li class="step-item"&gt; ... &lt;/li&gt;</code>
+          블록 하나를 통째로 복사해서 날짜·제목·내용만 수정하시면 됩니다.
+        </p>
+      </div>
+
+      <!-- 댓글 영역 -->
+      <div class="card" style="margin-top:16px;">
+        <h3 class="section-title" style="font-size:1.1rem;">이 단계에 대한 독자 댓글</h3>
+        <p class="section-sub">
+          글쓰기 과정에서 느끼신 점이나 궁금한 점, 조언을 자유롭게 남겨 주세요.
+          댓글 작성에는 GitHub 계정이 필요합니다.
+        </p>
+
+        <!-- utterances 댓글 위젯: repo 값을 본인 것으로 바꾸세요 -->
+        <script src="https://utteranc.es/client.js"
+                repo="your-github-username/your-repo-name"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
+
+        <p class="small">
+          ※ 위 <code>repo="your-github-username/your-repo-name"</code> 부분을  
+          예: <code>repo="seomin12312-cmyk/seomin12312-cmyk.github.io"</code> 처럼
+          본인의 GitHub 저장소로 바꿔야 실제 댓글이 기록됩니다.
+        </p>
       </div>
     </section>
 
-    <!-- 작가 소개 섹션 -->
-    <section id="about" class="section">
-      <div class="section-inner">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">ABOUT THE AUTHOR</div>
-            <h2 class="section-title">작가 소개, 혹은 그냥 나에 대하여</h2>
-          </div>
-        </div>
-
-        <div class="two-cols">
-          <div class="about-text">
-            <p style="font-size:0.9rem;">
-              낮에는 평범한 직장인, 밤에는 조금 덜 평범한 글쟁이가 되려고
-              합니다.  
-              오랫동안 “언젠가 책을 쓰고 싶다”는 말을 입버릇처럼 해 왔는데,
-              어느 날 문득 깨달았습니다. “언젠가”라는 말은 대개 “아무 때나
-              안 해도 된다”는 말과 비슷하다는 것을요.
-            </p>
-            <p style="font-size:0.9rem;">
-              그래서 변명을 조금 줄이고, 실제로 페이지를 채워보기로 했습니다.
-              이 홈페이지는 그 과정의 기록입니다.  
-              거창한 성공담이 아니라, 자주 미루고, 자주 후회하면서도
-              결국에는 한 줄씩 적어 나가는 사람의 이야기입니다.
-            </p>
-            <p style="font-size:0.9rem;">
-              이 여정이 끝나면, 저는 아마 조금 다른 사람이 되어 있을 겁니다.  
-              그리고 언젠가 비슷한 마음으로 글을 쓰고 싶은 누군가에게, 이
-              기록이 작은 참고서가 되었으면 좋겠습니다.
-            </p>
-          </div>
-
-          <div>
-            <div class="note-box" style="margin-bottom:10px;">
-              간단 프로필
-              <ul style="margin-top:4px; padding-left:16px; font-size:0.84rem;">
-                <li>직업: ○○ 분야 직장인</li>
-                <li>관심사: 글쓰기, 교육, 일과 삶의 균형</li>
-                <li>버킷리스트: 첫 책 출간, 작은 북토크 열기</li>
-              </ul>
-            </div>
-            <div class="note-box">
-              이력서처럼 완벽한 프로필이 아니어도 괜찮습니다.  
-              “왜 이 책을 쓰는지”에 대한 한두 줄이 있다면, 그게 가장 중요한
-              소개가 됩니다.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 연락 / 구독 섹션 -->
-    <section id="contact" class="section">
-      <div class="section-inner">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">STAY IN TOUCH</div>
-            <h2 class="section-ti글쓰기 여정. All rights reserved.</div>
-    <div>
-      Made with plain HTML &amp; CSS · 수정과 실험은 언제나 진행 중입니다.
-    </div>
-  </footer>
-</body>
-</html>
+    <!-- 3. 작가 소개 탭 -->
+    <section id="author" class="hidden">
+      <div class="card grid-two">
+        <div>
+          <h2 class="section-title">작가 소개</h2>
+          <p class="section-sub">
+            낮에는 직장인, 밤에는 조금 덜 평범한 글 쓰는 사람.
+            오랫동안 “언젠가 책을 쓰고 싶다”고만 말하다가,
+            이제는 그 말을 실제 페이지로 옮겨보려 합니다.
+          </p>
